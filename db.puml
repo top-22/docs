@@ -33,6 +33,7 @@ class Message {
 }
 class Attachment {
   **id**
+  type
   blob
 }
 class Tag {
