@@ -1,0 +1,54 @@
+@startuml db
+
+hide circle
+hide methods
+' left to right direction
+
+title DB
+
+class User {
+  **id**
+  name
+}
+class Affiliation {
+  **id**
+  name
+}
+class Room {
+  **id**
+  name
+  description
+  createdAt
+}
+class Thread {
+  **id**
+  name
+  description?
+}
+class Message {
+  **id**
+  content
+  createdAt
+
+}
+class Attachment {
+  **id**
+  blob
+}
+class Tag {
+  **id**
+  name
+}
+Room "1" o-- "*" Thread
+Room "*" o-- "*" User
+Room "*" o-- "1..*" User : admin
+Thread "1" o-- "1" Message : root
+Thread "1" o-- "*" Message : replies
+Message "1" o-- "*" Attachment
+Message "*" o-- "*" Tag
+Message "*" o-- "1" User
+User "*" o-- "*" Affiliation
+Room "*" o-- "*" Affiliation : > optional
+Room "*" o-- "*" Affiliation : > needed
+
+@enduml
